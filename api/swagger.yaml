@@ -1,0 +1,257 @@
+---
+swagger: "2.0"
+info:
+  version: "0.2.1"
+  title: "Library System"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+- "http"
+- "https"
+consumes:
+- "application/json"
+produces:
+- "application/json"
+paths:
+  /swagger:
+    x-swagger-pipe: "swagger_raw"
+  /books:
+    get:
+      description: "Get a list of the library books"
+      operationId: "getAllBooks"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+    post:
+      description: "Create a new book"
+      operationId: "createBook"
+      parameters:
+      - in: "body"
+        name: "Book"
+        description: "The details of the book to create"
+        required: true
+        schema:
+          $ref: "#/definitions/Book_1"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+  /books/{id}:
+    get:
+      description: "Get a book for a given id"
+      operationId: "findBook"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+    put:
+      description: "Update/change a book"
+      operationId: "updateBook"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "the various parameters"
+        required: false
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        204:
+          description: "Success"
+        404:
+          description: "configuration was not found"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+    delete:
+      description: "delete an instance of a book"
+      operationId: "deleteBook"
+      parameters:
+      - name: "id"
+        in: "path"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/Book"
+        404:
+          description: "book was not found"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+  /genretypes:
+    get:
+      description: "Get a list of the Genre Types"
+      operationId: "getAllGenreTypes"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/GenreTypes"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+  /statustypes:
+    get:
+      description: "Get a list of the status types"
+      operationId: "getAllStatusTypes"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/StatusTypes"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
+definitions:
+  Book:
+    required:
+    - "author"
+    - "genre"
+    - "status"
+    - "summary"
+    - "title"
+    properties:
+      title:
+        type: "string"
+      author:
+        type: "string"
+      genre:
+        type: "string"
+      summary:
+        type: "string"
+      status:
+        type: "string"
+    example:
+      summary: "summary"
+      author: "author"
+      genre: "genre"
+      title: "title"
+      status: "status"
+  GenreTypes:
+    required:
+    - "description"
+    properties:
+      description:
+        type: "string"
+    example:
+      description: "description"
+  StatusTypes:
+    required:
+    - "description"
+    properties:
+      description:
+        type: "string"
+    example:
+      description: "description"
+  Error:
+    required:
+    - "code"
+    - "message"
+    - "status"
+    properties:
+      status:
+        type: "number"
+      code:
+        type: "string"
+      message:
+        type: "string"
+      details:
+        type: "object"
+        properties: {}
+  Book_1:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      author:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      genre:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      summary:
+        type: "string"
+        minLength: 0
+        maxLength: 200
+      status:
+        type: "string"
+        minLength: 9
+        maxLength: 11
+    example:
+      summary: "summary"
+      author: "author"
+      genre: "genre"
+      title: "title"
+      status: "status"
+  body:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      author:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      genre:
+        type: "string"
+        minLength: 1
+        maxLength: 30
+      summary:
+        type: "string"
+        minLength: 0
+        maxLength: 200
+      status:
+        type: "string"
+        minLength: 9
+        maxLength: 11
