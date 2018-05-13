@@ -1,7 +1,6 @@
 
 const books = [
     {
-      "id": 1,
       "title": "The Wind In the Willows",
       "author": "Kenneth Grahame",
       "genre": "Childrens",
@@ -9,7 +8,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 2,
       "title": "Stalingrad",
       "author": "Antony Beevor",
       "genre": "Military History",
@@ -17,7 +15,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 3,
       "title": "The Satanic Verses",
       "author": "Salman Rushdie",
       "genre": "Fiction",
@@ -25,7 +22,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 4,
       "title": "Almost the Perfect Murder",
       "author": "Paul Williams",
       "genre": "Crime",
@@ -33,7 +29,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 5,
       "title": "The Second World War",
       "author": "Antony Beevor",
       "genre": "Military History",
@@ -41,7 +36,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 6,
       "title": "Circle of Friends",
       "author": "Maeve Binchy",
       "genre": "Fiction",
@@ -49,7 +43,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 7,
       "title": "Tara Road",
       "author": "Maeve Binchy",
       "genre": "Fiction",
@@ -57,7 +50,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 8,
       "title": "A Week in Winter",
       "author": "Maeve Binchy",
       "genre": "Fiction",
@@ -65,7 +57,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 9,
       "title": "Badfellas",
       "author": "Paul Williams",
       "genre": "Crime",
@@ -73,7 +64,6 @@ const books = [
       "status": "available"
     },
     {
-      "id": 10,
       "title": "The Magic Faraway Tree",
       "author": "Enid Blyton",
       "genre": "Childrens",
@@ -84,25 +74,25 @@ const books = [
 
 const statusTypes = [
   {
-    "value": "available"
+    "statustype": "available"
   },
   {
-    "value": "unavailable"
+    "statustype": "unavailable"
   }
 ];
 
 const genreTypes = [
   {
-    "value": "Crime"
+    "genretype": "Crime"
   },
   {
-    "value": "Childrens"
+    "genretype": "Childrens"
   },
   {
-    "value": "Military History"
+    "genretype": "Military History"
   },
   {
-    "value": "Fiction"
+    "genretype": "Fiction"
   }
 ];
 

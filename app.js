@@ -55,4 +55,6 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
     DAO.loadStatusTypes();
   }
 
+  module.exports = app; // for testing
+
 });

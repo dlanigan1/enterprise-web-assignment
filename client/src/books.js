@@ -11,29 +11,12 @@ const selectRowProp = {
   clickToSelect: true
 };
 
-var booklist = [{}];
-var statuslist = [];
-var genrelist = [];
-
 function onAfterInsertRow(row) {
 
-  let opts =   {
-        "title": row['title'],
-        "author": row['author'],
-        "genre": row['genre'],
-        "summary": row['summary'],
-        "status": row['status']
-    };
-
-  console.log('Posting request to JSON file.');
-  fetch(`http://localhost:8080/books/`, {
-    "method": 'post',
-    "headers": {"Accept": "application/json","Content-Type":"application/json"},
-    "body": JSON.stringify(opts)
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    console.log('Created Book:', data.title);
+  console.log('Posting request to database');
+  return api2.addBook(`${row.author}`,`${row.title}`,`${row.summary}`,`${row.genre}`,`${row.status}`)
+  .then(function(response) {
+    console.log('added Book:', response);
   });
 
 }
@@ -46,60 +29,74 @@ const options = {
 
 function onAfterDeleteRow(rowKeys) {
 
-  console.log('Posting request to JSON file.');
-  fetch(`http://localhost:8080/books/${rowKeys}`, {
-    "method": 'delete'
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    console.log('Deleted Book:', data.id);
+  console.log('Posting request to database');
+  return api2.deleteBook(`${rowKeys}`)
+  .then(function(response) {
+    console.log('Deleted Book:', response);
   });
 
-  alert('you deleted row: ' + rowKeys);
 }
 
 class Books extends React.Component {
+  state = {bookList: [{}], statusTypes:[], genreTypes:[]};
 
-    componentWillMount() {
-    }
+  componentWillMount() {
+  }
+  async componentDidMount() {
+   const booklist = [];
+   const statuslist = [];
+   const genrelist = [];
+   const q = await api2.getAllBooks()
+     .then(function(result) {
+       var values = Array.prototype.map.call(result, function(obj) {
+         booklist.push(obj);
+       });
+
+     })
+
+   const y = await api2.getAllStatusTypes()
+   .then(function(result) {
+     var values = Array.prototype.map.call(result, function(obj) {
+       statuslist.push(obj.statustype);
+     });
+   });
+   const z = await api2.getAllGenreTypes()
+   .then(function(result) {
+     var values = Array.prototype.map.call(result, function(obj) {
+       genrelist.push(obj.genretype);
+     });
+   });
+
+    try{
+          this.setState({
+            books : booklist,
+            statusTypes:statuslist,
+            genreTypes:genrelist
+          }
+       );
+
+       } catch (e){
+         this.setState({
+                  isHidden: true
+                });
+       }
+
+  }
 
     render() {
-      let books = api2.getAllBooks()
-      .then(function(result) {
-        booklist = result;
-        console.log("booklist", booklist);
-
-      })
-      let statusTypes = api2.getAllStatusTypes()
-      .then(function(result) {
-        statuslist = [];
-        var values = Array.prototype.map.call(result, function(obj) {
-          statuslist.push(obj.statustype);
-        });
-        console.log("statuslist", statuslist);
-
-      })
-      let genreTypes = api2.getAllGenreTypes()
-      .then(function(result) {
-        genrelist = [];
-        var values = Array.prototype.map.call(result, function(obj) {
-          genrelist.push(obj.genretype);
-        });
-          console.log("genrelist", genrelist);
-
-      })
 
         return (
           <div>
             <h1>Add or Delete a Book</h1>
             <p>Click the <b>NEW</b> button to add a book</p>
             <p>Select a row and click the <b>DELETE</b> button to delete a book</p>
-            <BootstrapTable data={booklist} striped={true} hover={true} search={ true } selectRow={ selectRowProp } deleteRow={ true } insertRow={ true } options={ options }>
-                <TableHeaderColumn dataField="title" isKey true dataAlign="center" dataSort={true}>Title</TableHeaderColumn>
+            <BootstrapTable data={this.state.books} striped={true} hover={true} search={ true } selectRow={ selectRowProp } deleteRow={ true } insertRow={ true } options={ options }>
+                <TableHeaderColumn dataField="_id" isKey hidden dataAlign="center" dataSort={true}>ID</TableHeaderColumn>
+                <TableHeaderColumn dataField="title" dataAlign="center" dataSort={true}>Title</TableHeaderColumn>
                 <TableHeaderColumn dataField="author" dataAlign="center" dataSort={true}>Author</TableHeaderColumn>
-                <TableHeaderColumn dataField="genre" dataAlign="center" dataSort={true} editable={ { type: 'select', options: { values: genrelist } } }>Genre</TableHeaderColumn>
+                <TableHeaderColumn dataField="genre" dataAlign="center" dataSort={true} editable={ { type: 'select', options: { values: this.state.genreTypes } } }>Genre</TableHeaderColumn>
                 <TableHeaderColumn dataField="summary" dataAlign="center" dataSort={true} >Summary</TableHeaderColumn>
-                <TableHeaderColumn dataField="status" dataAlign="center" dataSort={true} editable={ { type: 'select', options: { values: statuslist } } }>Status</TableHeaderColumn>
+                <TableHeaderColumn dataField="status" dataAlign="center" dataSort={true} editable={ { type: 'select', options: { values: this.state.statusTypes } } }>Status</TableHeaderColumn>
             </BootstrapTable>
           </div>
         );
