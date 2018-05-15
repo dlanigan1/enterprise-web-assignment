@@ -40,21 +40,21 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   // Serve the Swagger documents and Swagger UI
   app.use(middleware.swaggerUi());
 
-  // Start the server
-  http.createServer(app).listen(serverPort, function () {
-    console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
-    console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
-    // Connect to database
-  });
-  mongoose.connect(process.env.mongoDB);
-  console.log('Mongo Database connected');
-  if (process.env.seedDb) {
-    // seed the database with data
-    DAO.loadBooks();
-    DAO.loadGenreTypes();
-    DAO.loadStatusTypes();
-  }
-
-  module.exports = app; // for testing
-
 });
+
+// Start the server
+http.createServer(app).listen(serverPort, function () {
+  console.log('Your server is listening on port %d (http://localhost:%d)', serverPort, serverPort);
+  console.log('Swagger-ui is available on http://localhost:%d/docs', serverPort);
+  // Connect to database
+});
+mongoose.connect(process.env.mongoDB);
+console.log('Mongo Database connected');
+if (process.env.seedDb) {
+  // seed the database with data
+  DAO.loadBooks();
+  DAO.loadGenreTypes();
+  DAO.loadStatusTypes();
+}
+
+module.exports = app; // for testing

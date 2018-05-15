@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
 var chai = require('chai'),
-  chaiAsPromised = require("chai-as-promised");
+  chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
 var expect = chai.expect,
   should = chai.should();
@@ -31,7 +31,6 @@ describe('controllers', function () {
 
 
     it('should find a specific book', function (done) {
-
       request(server)
         .get('/api/books/' + sampleBooks.data[0]._id)
         .set('Accept', 'application/json')
@@ -86,28 +85,28 @@ describe('controllers', function () {
           done();
         });
     });
-
-    describe('DELETE /api/books/{id}', function () {
-      before(() => {
-        return Schema.bookModel.insertMany(sampleBooks.data)
-      });
-      afterEach(() => {
-        return Schema.bookModel.remove({}) // clear the database
-      });
-
-
-      it('should delete a specific book', function (done) {
-
-        request(server)
-          .delete('/api/books/' + sampleBooks.data[0]._id)
-          .set('Accept', 'application/json')
-          .expect('Content-Type', /json/)
-          .expect(200)
-          .end(function (err, res) {
-            should.not.exist(err);
-            done();
-          });
-      });
+  });
+  describe('DELETE /api/books/{id}', function () {
+    before(() => {
+      return Schema.bookModel.insertMany(sampleBooks.data)
     });
+    afterEach(() => {
+      return Schema.bookModel.remove({}) // clear the database
+    });
+
+
+    it('should delete a specific book', function (done) {
+
+      request(server)
+        .delete('/api/books/' + sampleBooks.data[0]._id)
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+  });
 
 });
