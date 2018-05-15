@@ -50,7 +50,6 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
 module.exports.getAllGenreTypes = function getAllGenreTypes (req, res, next) {
   DAO.getAllGenreTypes()
     .then(function (response) {
-      console.log("dipdip", response);
       utils.writeJson(res, response);
     })
     .catch(function (response) {

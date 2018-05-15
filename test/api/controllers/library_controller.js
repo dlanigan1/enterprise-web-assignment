@@ -38,6 +38,8 @@ describe('controllers', function () {
         .expect(200)
         .end(function (err, res) {
           should.not.exist(err);
+          res.body.should.have.a.property('title').which.is.a('string');
+          res.body.title.should.equal('test book 1');
           done();
         });
     });
@@ -55,12 +57,65 @@ describe('controllers', function () {
     it('should find all books', function (done) {
 
       request(server)
-        .get('/api/books/' + sampleBooks.data[0]._id)
+        .get('/api/books/')
         .set('Accept', 'application/json')
         .expect('Content-Type', /json/)
         .expect(200)
         .end(function (err, res) {
           should.not.exist(err);
+          res.body[1].should.have.a.property('title').which.is.a('string');
+          res.body[1].title.should.equal('test book 2');
+          done();
+        });
+    });
+  });
+
+  describe('GET /api/statustypes', function () {
+    before(() => {
+//      return Schema.statusTypeModel.insertMany(sampleBooks.statusTypedata)
+    });
+    afterEach(() => {
+  //    return Schema.statusTypeModel.remove({}) // clear the database
+    });
+
+
+    it('should find all statusTypes', function (done) {
+
+      request(server)
+        .get('/api/statustypes/')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+          should.not.exist(err);
+          res.body[1].should.have.a.property('statustype').which.is.a('string');
+          res.body[1].statustype.should.equal('unavailable');
+
+          done();
+        });
+    });
+  });
+
+  describe('GET /api/genreTyps', function () {
+    before(() => {
+      return Schema.genreTypeModel.insertMany(sampleBooks.genreTypedata)
+    });
+    afterEach(() => {
+      return Schema.genreTypeModel.remove({}) // clear the database
+    });
+
+
+    it('should find all genreTypes', function (done) {
+
+      request(server)
+        .get('/api/genreTypes/')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+          should.not.exist(err);
+          res.body[1].should.have.a.property('genretype').which.is.a('string');
+          res.body[1].genretype.should.equal('Childrens');
           done();
         });
     });
@@ -82,6 +137,8 @@ describe('controllers', function () {
         .end(function (err, res) {
           // store the newly created id for use in later tests
           should.not.exist(err);
+          res.body.should.have.a.property('title').which.is.a('string');
+          res.body.title.should.equal('title test');
           done();
         });
     });

@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-const sampleBookID = new mongoose.Types.ObjectId()
-const sampleBookID2 = new mongoose.Types.ObjectId()
-
 const data = [{
         _id: mongoose.Types.ObjectId(),
         title: "test book 1",
@@ -19,13 +16,39 @@ const data = [{
         genre: "test genre 2",
         summary: "test summary 2",
         status: "test status 2"
-
     }
 
 ]
 
+const statusTypedata = [
+  {
+    _id: mongoose.Types.ObjectId(),
+    "statustype": "available"
+  },
+  {
+    _id: mongoose.Types.ObjectId(),
+    "statustype": "unavailable"
+  }
+];
+
+const genreTypedata = [
+  {
+    _id: mongoose.Types.ObjectId(),
+    "genretype": "Crime"
+  },
+  {
+    _id: mongoose.Types.ObjectId(),
+    "genretype": "Childrens"
+  },
+  {
+    _id: mongoose.Types.ObjectId(),
+    "genretype": "Military History"
+  },
+  {
+    _id: mongoose.Types.ObjectId(),
+    "genretype": "Fiction"
+  }
+];
 module.exports = {
-    data: data,
-    sampleBookID: sampleBookID,
-    sampleBookID2: sampleBookID2
+    data: data, statusTypedata: statusTypedata, genreTypedata: genreTypedata
 }
