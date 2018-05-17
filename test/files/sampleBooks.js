@@ -4,18 +4,18 @@ const data = [{
         _id: mongoose.Types.ObjectId(),
         title: "test book 1",
         author: "test author 1",
-        genre: "test genre 1",
+        genre: "Childrens",
         summary: "test summary 1",
-        status: "test status 1"
+        status: "unavailable"
 
     },
     {
         _id: mongoose.Types.ObjectId(),
         title: "test book 2",
         author: "test author 2",
-        genre: "test genre 2",
+        genre: "Military History",
         summary: "test summary 2",
-        status: "test status 2"
+        status: "available"
     }
 
 ]

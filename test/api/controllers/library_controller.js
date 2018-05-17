@@ -71,13 +71,6 @@ describe('controllers', function () {
   });
 
   describe('GET /api/statustypes', function () {
-    before(() => {
-//      return Schema.statusTypeModel.insertMany(sampleBooks.statusTypedata)
-    });
-    afterEach(() => {
-  //    return Schema.statusTypeModel.remove({}) // clear the database
-    });
-
 
     it('should find all statusTypes', function (done) {
 
@@ -135,13 +128,65 @@ describe('controllers', function () {
         .set('Accept', 'application/json')
         .expect(200)
         .end(function (err, res) {
-          // store the newly created id for use in later tests
           should.not.exist(err);
           res.body.should.have.a.property('title').which.is.a('string');
           res.body.title.should.equal('title test');
           done();
         });
     });
+    it('it should fail to create a book with data thats too long', function (done) {
+      request(server)
+        .post('/api/books')
+        .send({
+          "title": "this test title is far too long and will break the validation",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "available",
+          "genre": "childrens"
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+
+    it('it should fail to create a book with invalid status data', function (done) {
+      request(server)
+        .post('/api/books')
+        .send({
+          "title": "test title",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "aalable",
+          "genre": "childrens"
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+    it('it should fail to create a book with invalid genre data', function (done) {
+      request(server)
+        .post('/api/books')
+        .send({
+          "title": "test title",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "unavailable",
+          "genre": ""
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+
   });
   describe('DELETE /api/books/{id}', function () {
     before(() => {

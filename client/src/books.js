@@ -17,6 +17,7 @@ function onAfterInsertRow(row) {
   return api2.addBook(`${row.author}`,`${row.title}`,`${row.summary}`,`${row.genre}`,`${row.status}`)
   .then(function(response) {
     console.log('added Book:', response);
+    window.location.reload();
   });
 
 }
@@ -33,6 +34,7 @@ function onAfterDeleteRow(rowKeys) {
   return api2.deleteBook(`${rowKeys}`)
   .then(function(response) {
     console.log('Deleted Book:', response);
+    window.location.reload();
   });
 
 }
@@ -91,7 +93,7 @@ class Books extends React.Component {
             <p>Click the <b>NEW</b> button to add a book</p>
             <p>Select a row and click the <b>DELETE</b> button to delete a book</p>
             <BootstrapTable data={this.state.books} striped={true} hover={true} search={ true } selectRow={ selectRowProp } deleteRow={ true } insertRow={ true } options={ options }>
-                <TableHeaderColumn dataField="_id" isKey hidden dataAlign="center" dataSort={true}>ID</TableHeaderColumn>
+                <TableHeaderColumn dataField="_id" isKey autoValue hidden dataAlign="center" dataSort={true}>ID</TableHeaderColumn>
                 <TableHeaderColumn dataField="title" dataAlign="center" dataSort={true}>Title</TableHeaderColumn>
                 <TableHeaderColumn dataField="author" dataAlign="center" dataSort={true}>Author</TableHeaderColumn>
                 <TableHeaderColumn dataField="genre" dataAlign="center" dataSort={true} editable={ { type: 'select', options: { values: this.state.genreTypes } } }>Genre</TableHeaderColumn>
