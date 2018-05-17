@@ -43,7 +43,7 @@ function onAfterSaveCell(row, cellName, cellValue) {
 }
 
 class EditBooks extends React.Component {
-  state = {bookList: [{}], statusTypes:[], genreTypes:[]};
+  state = {books: [{}], statusTypes:[], genreTypes:[]};
 
     componentWillMount() {
     }

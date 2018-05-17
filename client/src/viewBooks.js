@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import api from './test/stubAPI'
+import * as api2 from './api';
 
 class Book extends React.Component {
   render() {
@@ -26,12 +27,38 @@ class Book extends React.Component {
 }
 
 class ViewBooks extends React.Component {
+  state = {books: [{}]};
+
+  componentWillMount() {
+  }
+
+  async componentDidMount() {
+   const booklist = [];
+   const q = await api2.getAllBooks()
+     .then(function(result) {
+       var values = Array.prototype.map.call(result, function(obj) {
+         booklist.push(obj);
+       });
+
+     })
+
+    try{
+          this.setState({
+            books : booklist
+          }
+       );
+
+       } catch (e){
+         console.log("there was an error :" ,e)
+       }
+
+  }
 
   render() {
-    let bookList = api.getAllBooks() ;
 
-    let bookRows =  bookList.map(
-           (b) => <Book key={b.id} book={b} />
+
+    let bookRows =  this.state.books.map(
+           (b) => <Book key={b._id} book={b} />
     );
 
     return (

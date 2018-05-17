@@ -40,7 +40,7 @@ function onAfterDeleteRow(rowKeys) {
 }
 
 class Books extends React.Component {
-  state = {bookList: [{}], statusTypes:[], genreTypes:[]};
+  state = {books: [{}], statusTypes:[], genreTypes:[]};
 
   componentWillMount() {
   }
