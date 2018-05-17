@@ -78,9 +78,7 @@ class Books extends React.Component {
        );
 
        } catch (e){
-         this.setState({
-                  isHidden: true
-                });
+         console.log("there was an error :" ,e)
        }
 
   }

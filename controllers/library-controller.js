@@ -70,6 +70,7 @@ module.exports.getAllStatusTypes = function getAllStatusTypes (req, res, next) {
 module.exports.updateBook = function updateBook (req, res, next) {
   var id = req.swagger.params['id'].value;
   var body = req.swagger.params['body'].value;
+  
   DAO.updateBook(id,body)
     .then(function (response) {
       utils.writeJson(res, response);

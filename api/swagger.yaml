@@ -237,20 +237,20 @@ definitions:
     properties:
       title:
         type: "string"
-        minLength: 1
-        maxLength: 30
+        minLength: 5
+        maxLength: 50
       author:
         type: "string"
-        minLength: 1
-        maxLength: 30
+        minLength: 5
+        maxLength: 50
       genre:
         type: "string"
-        minLength: 1
-        maxLength: 30
+        minLength: 5
+        maxLength: 25
       summary:
         type: "string"
-        minLength: 0
-        maxLength: 200
+        minLength: 5
+        maxLength: 250
       status:
         type: "string"
         minLength: 9

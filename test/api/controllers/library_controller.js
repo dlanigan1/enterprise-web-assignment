@@ -188,14 +188,83 @@ describe('controllers', function () {
     });
 
   });
-  describe('DELETE /api/books/{id}', function () {
-    before(() => {
-      return Schema.bookModel.insertMany(sampleBooks.data)
+
+  describe('PUT /api/books/{id}', function () {
+    it('it should update a book', function (done) {
+      request(server)
+        .put('/api/books/' + sampleBooks.data[0]._id)
+        .send({
+          "title": "new title",
+          "author": "new author",
+          "summary": " new summary",
+          "status": "available",
+          "genre": "childrens"
+        })
+        .set('Accept', 'application/json')
+        .expect(200)
+        .end(function (err, res) {
+          should.not.exist(err);
+          res.body.should.have.a.property('title').which.is.a('string');
+          res.body.title.should.equal('new title');
+          done();
+        });
     });
-    afterEach(() => {
-      return Schema.bookModel.remove({}) // clear the database
+    it('it should fail to update a book with data thats too long', function (done) {
+      request(server)
+        .put('/api/books/' + sampleBooks.data[0]._id)
+        .send({
+          "title": "this test title is far too long and will break the validation",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "available",
+          "genre": "childrens"
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
     });
 
+    it('it should fail to update a book with invalid status data', function (done) {
+      request(server)
+        .put('/api/books/' + sampleBooks.data[0]._id)
+        .send({
+          "title": "test title",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "aalable",
+          "genre": "childrens"
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+    it('it should fail to update a book with invalid genre data', function (done) {
+      request(server)
+        .put('/api/books/' + sampleBooks.data[0]._id)
+        .send({
+          "title": "test title",
+          "author": "author test",
+          "summary": "summary test",
+          "status": "unavailable",
+          "genre": ""
+        })
+        .set('Accept', 'application/json')
+        .expect(400)
+        .end(function (err, res) {
+          should.not.exist(err);
+          done();
+        });
+    });
+
+  });
+
+  describe('DELETE /api/books/{id}', function () {
 
     it('should delete a specific book', function (done) {
 

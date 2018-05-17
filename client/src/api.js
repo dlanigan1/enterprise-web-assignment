@@ -26,11 +26,11 @@ export const deleteBook = async (bookId) => {
 };
 
 export const addBook = async (newAuthor,newTitle,newSummary,newGenre, newStatus) => {
-  console.log("title :", newTitle)
-  console.log("author :", newAuthor)
-  console.log("summary :", newSummary)
-  console.log("genre :" ,newGenre)
-  console.log("status :", newStatus)
   const resp = await axios.post('/api/books',{title: newTitle, status: newStatus , summary: newSummary, genre: newGenre, author: newAuthor});
+  return resp.data;
+};
+
+export const editBook = async (bookId, newAuthor,newTitle,newSummary,newGenre, newStatus) => {
+  const resp = await axios.put(`/api/books/${bookId}`,{ title: newTitle, author: newAuthor, genre: newGenre, summary: newSummary,status: newStatus });
   return resp.data;
 };
