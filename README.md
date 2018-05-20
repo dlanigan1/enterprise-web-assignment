@@ -59,6 +59,7 @@ For the second part of the assignment, I created a server application that hooks
 + save-dev 2.0.0
 + swagger-tools 0.10.1
 
+The repo can be cloned from https://github.com/dlanigan1/enterprise-web-assignment
 After cloning the repo, You have to do the following to run the app:
 
 1) npm install
