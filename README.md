@@ -83,6 +83,8 @@ The genreTypes table is a lookup table of genre types.
 
 The borrowedBooks table is used to determine how many of each book is available to borrow. The idea is that you can have multiple copies of each book in the books table. they will have a common title and author. So, everytime a user borrows a book, the system will increment the counter for that title in the borrowed books table and the book in the book table will be marked as unavailable. The opposite will happen on returning a book. At any time you can see how many copies of each title are available or unavailable by seeing what's in the borrowed books table.
 
+I also add some data validation at the schema level.
+
 ### Status types
 "statusTypes" : ["available","unavailable"],
 
