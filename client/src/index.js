@@ -32,7 +32,7 @@ const Router = (props) =>
                 <Route path='/viewbooks/:id' component={ Book } />
                 <Route path='/editbooks/' component={ EditBooks } />
                 <Route path='/viewbooks/' component={ ViewBooks } />
-                <Route path='/borrowbook/' component={ BorrowBook } />
+                <Route path='/borrowbook/' component={ ViewBooks } />
                 <Route path='/returnbook/' component={ ReturnBook } />
                 <Route exact path='/' component={ Home } />
                 <Redirect from='*' to='/' />

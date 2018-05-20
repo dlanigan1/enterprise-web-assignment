@@ -70,6 +70,31 @@ describe('controllers', function () {
     });
   });
 
+  describe('GET /api/titles', function () {
+    before(() => {
+      return Schema.bookModel.insertMany(sampleBooks.data)
+    });
+    afterEach(() => {
+      return Schema.bookModel.remove({}) // clear the database
+    });
+
+
+    it('should find all book titles', function (done) {
+
+      request(server)
+        .get('/api/titles/')
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(200)
+        .end(function (err, res) {
+          should.not.exist(err);
+          res.body[1].should.have.a.property('title').which.is.a('string');
+          res.body[1].title.should.equal('test book 2');
+          done();
+        });
+    });
+  });
+
   describe('GET /api/statustypes', function () {
 
     it('should find all statusTypes', function (done) {

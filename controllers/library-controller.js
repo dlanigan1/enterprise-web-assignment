@@ -47,6 +47,17 @@ module.exports.getAllBooks = function getAllBooks (req, res, next) {
     });
 };
 
+module.exports.getAllBookTitles = function getAllBookTitles (req, res, next) {
+
+  DAO.getAllBookTitles()
+    .then(function (response) {
+      utils.writeJson(res, response);
+    })
+    .catch(function (response) {
+      utils.writeJson(res, response);
+    });
+};
+
 module.exports.getAllGenreTypes = function getAllGenreTypes (req, res, next) {
   DAO.getAllGenreTypes()
     .then(function (response) {
@@ -70,7 +81,7 @@ module.exports.getAllStatusTypes = function getAllStatusTypes (req, res, next) {
 module.exports.updateBook = function updateBook (req, res, next) {
   var id = req.swagger.params['id'].value;
   var body = req.swagger.params['body'].value;
-  
+
   DAO.updateBook(id,body)
     .then(function (response) {
       utils.writeJson(res, response);

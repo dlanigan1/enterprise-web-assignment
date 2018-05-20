@@ -55,6 +55,7 @@ if (process.env.seedDb) {
   DAO.loadBooks();
   DAO.loadGenreTypes();
   DAO.loadStatusTypes();
+  DAO.loadBorrowedBooks();
 }
 
 module.exports = app; // for testing

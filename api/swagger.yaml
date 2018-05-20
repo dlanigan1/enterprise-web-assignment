@@ -15,6 +15,21 @@ produces:
 paths:
   /swagger:
     x-swagger-pipe: "swagger_raw"
+  /titles:
+    get:
+      description: "Get a list of the library book titles"
+      operationId: "getAllBookTitles"
+      parameters: []
+      responses:
+        200:
+          description: "Success"
+          schema:
+            $ref: "#/definitions/BookTitle"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/Error"
+      x-swagger-router-controller: "library-controller"
   /books:
     get:
       description: "Get a list of the library books"
@@ -148,6 +163,14 @@ paths:
             $ref: "#/definitions/Error"
       x-swagger-router-controller: "library-controller"
 definitions:
+  BookTitle:
+    required:
+    - "title"
+    properties:
+      title:
+        type: "string"
+    example:
+      title: "the wind in the willows"
   Book:
     required:
     - "author"

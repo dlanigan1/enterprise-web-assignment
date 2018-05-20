@@ -7,6 +7,12 @@ export const getAllBooks = async () => {
 
 };
 
+export const getAllBookTitles = async () => {
+   const resp = await axios.get('/api/titles')
+   return resp.data;
+
+};
+
 export const getAllStatusTypes = async () => {
    const resp = await axios.get('/api/statustypes')
    return resp.data;

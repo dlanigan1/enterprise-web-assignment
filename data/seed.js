@@ -11,7 +11,7 @@ const books = [
       "title": "Stalingrad",
       "author": "Antony Beevor",
       "genre": "Military History",
-      "summary": "Stalingrad is uyuyuyuyuyua narrative history written by Antony Beevor of the battle fought in and around the city of Stalingrad during World War II",
+      "summary": "Stalingrad is a narrative history written by Antony Beevor of the battle fought in and around the city of Stalingrad during World War II",
       "status": "available"
     },
     {
@@ -25,7 +25,7 @@ const books = [
       "title": "Almost the Perfect Murder",
       "author": "Paul Williams",
       "genre": "Crime",
-      "summary": "yyuyuyuAn examination into the murder of Elaine O Hara and the subsequent trial of Graham Dywer",
+      "summary": "An examination into the murder of Elaine O Hara and the subsequent trial of Graham Dywer",
       "status": "available"
     },
     {
@@ -96,4 +96,57 @@ const genreTypes = [
   }
 ];
 
-module.exports = {books,statusTypes,genreTypes};
+const borrowedBooks = [
+    {
+      "title": "The Wind In the Willows",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "Stalingrad",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "The Satanic Verses",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "Almost the Perfect Murder",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "The Second World War",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "Circle of Friends",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "Tara Road",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "A Week in Winter",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "Badfellas",
+      "available": 1,
+      "unavailable": 0,
+    },
+    {
+      "title": "The Magic Faraway Tree",
+      "available": 1,
+      "unavailable": 0,
+    },
+];
+
+module.exports = {books,statusTypes,genreTypes, borrowedBooks};
