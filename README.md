@@ -11,6 +11,8 @@ The reason for the View screen and the Add/Edit screen looking differently is be
 
 For the second part of the assignment, I created a server application that hooks the front end with a MongoDB back end via RESTful APIs. The APIs were defined using SWAGGER AND EXPRESS and they talk to a MONGO database via MONGOOSE. I also implemented API unit tests using MOCHA.
 
+The app is also hosted on HEROKU.
+
 ## API calls.
   + GET /titles - gets all book titles
   + GET /books - gets all books
@@ -148,13 +150,16 @@ The following images show the various views throughout the system.
 ## Extra features
 
 Standard CRUD operations persisting to a MongoDB, but the API can be read and tested online on the SWAGGER website.
+The app has been deployed to HEROKU.
 
 ## Independent learning.
 
 I researched and implemented the custom data grid control for the edit and add pages along with its associated functionality.
 I also had to learn how to implement and run json-server from package.json and I had to learn how to formulate the REST API calls to perform the CRUD operations for the assignment first part.
 
-For the second part I hae to resarch how to design and crate APIs using SWAGGER and how to implement that in my project.
+For the second part I had to research how to design and crate APIs using SWAGGER and how to implement that in my project.
+
+I also had to learn how to host an app containing a MONGODB database on HEROKU.
 
 [image1]: ./homepage.png
 [image2]: ./about.png
