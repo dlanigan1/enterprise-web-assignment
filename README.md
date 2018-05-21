@@ -60,21 +60,22 @@ The app is also hosted on HEROKU.
 + nodemon 1.17.3
 + save-dev 2.0.0
 + swagger-tools 0.10.1
++ concurrently 3.5.1
 
 The repo can be cloned from https://github.com/dlanigan1/enterprise-web-assignment
 After cloning the repo, You have to do the following to run the app:
 
 1) npm install
 
-2) mongod
+2) cd client
 
-3) npm run server
+3) npm install
 
-3) cd client
+4) cd ..
 
-4) npm install
+5) npm run start
 
-5) npm start
+Th app also lives on heroku at : https://dashboard.heroku.com/apps/secret-river-63213
 
 ## Data Model Design.
 
